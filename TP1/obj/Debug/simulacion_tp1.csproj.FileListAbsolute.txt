@@ -113,3 +113,17 @@ C:\Users\note\Desktop\TP1\bin\Debug\simulacion_tp1.exe
 C:\Users\note\Desktop\TP1\bin\Debug\simulacion_tp1.pdb
 C:\Users\note\Desktop\TP1\obj\Debug\simulacion_tp1.exe.manifest
 C:\Users\note\Desktop\TP1\obj\Debug\simulacion_tp1.application
+C:\Users\note\Desktop\SIM\TP1\bin\Debug\simulacion_tp1.exe.config
+C:\Users\note\Desktop\SIM\TP1\bin\Debug\simulacion_tp1.exe.manifest
+C:\Users\note\Desktop\SIM\TP1\bin\Debug\simulacion_tp1.application
+C:\Users\note\Desktop\SIM\TP1\bin\Debug\simulacion_tp1.exe
+C:\Users\note\Desktop\SIM\TP1\bin\Debug\simulacion_tp1.pdb
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.Form1.resources
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.Properties.Resources.resources
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.csproj.GenerateResource.cache
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.csproj.CoreCompileInputs.cache
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.exe.manifest
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.application
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.exe
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.pdb
+C:\Users\note\Desktop\SIM\TP1\obj\Debug\simulacion_tp1.csprojAssemblyReference.cache

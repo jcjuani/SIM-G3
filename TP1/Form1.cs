@@ -19,6 +19,12 @@ namespace simulacion_tp1
         int tamanio;
         List<Intervalo> intervalos;
 
+        int fila = 0;
+        int press = 1;
+        // Para listar desde a hasta
+        private double filaAPartirDeDondeMostrar;
+        private double filaHastaDondeMostrar;
+
         public Form1()
         {
             InitializeComponent();
@@ -100,6 +106,8 @@ namespace simulacion_tp1
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
+
+            this.grilla.Rows.Clear();
             if (isValid())
             {
                 int x = int.Parse(txtX.Text);
@@ -132,10 +140,18 @@ namespace simulacion_tp1
                     }
                 }
 
-                grilla.DataSource = lista;
+                MessageBox.Show("Se generaron los Nros Randoms de manera exitosa" , "Aviso",
+                      MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+               
                 cmbIntervalo.SelectedIndex = 0;
+                groupBox5.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+
             }
-            else {
+            else 
+            {
                 MessageBox.Show("Todos los campos son obligatorios");
             }
           
@@ -275,6 +291,89 @@ namespace simulacion_tp1
         private void btnMostrarFe_Click(object sender, EventArgs e)
         {
             chrGrafico.Series[1].Enabled = !chrGrafico.Series[1].Enabled;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.grilla.Rows.Clear();
+                foreach (var item in lista)
+                {
+                    if ((item.Posicion) < (21 * press))
+                    {
+
+                        this.grilla.Rows.Add();
+                        grilla.Rows[item.Posicion - 1].Cells["posicion"].Value = item.Posicion;
+                        grilla.Rows[item.Posicion - 1].Cells["random"].Value = item.Random;
+                        //fila++;
+
+                    }
+                    else
+                    {
+                        press++;
+                        return;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Limpiar los datos nuevamete.");
+            }
+           
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (radioRango.Checked == true)
+            {
+                this.filaAPartirDeDondeMostrar = Convert.ToDouble(this.txtMinDesde.Text);
+                this.filaHastaDondeMostrar = Convert.ToDouble(this.txtMinHasta.Text);
+                foreach (var item in lista)
+                {
+                    if (item.Posicion == 0)
+                    {
+                        if ((item.Posicion - 1) >= this.filaAPartirDeDondeMostrar && (item.Posicion - 1) <= filaHastaDondeMostrar)
+                        {
+
+                            this.grilla.Rows.Add();
+                            grilla.Rows[item.Posicion - 1].Cells["posicion"].Value = item.Posicion;
+                            grilla.Rows[item.Posicion - 1].Cells["random"].Value = item.Random;
+
+
+                        }
+                    }else
+                    {
+                        try
+                        {
+                            if ((item.Posicion) >= this.filaAPartirDeDondeMostrar && (item.Posicion) <= filaHastaDondeMostrar)
+                            {
+
+                                int aux = grilla.Rows.Add();
+                                grilla.Rows[aux].Cells["posicion"].Value = item.Posicion;
+                                grilla.Rows[aux].Cells["random"].Value = item.Random;
+
+
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                            MessageBox.Show("Limpiar los datos nuevamete.");
+                        }
+                    
+                    }
+                  
+                }
+
+            }
+            else if (radioCada10mil.Checked == true)
+            {
+                grilla.DataSource = lista;
+            }
+
         }
     }
 }
