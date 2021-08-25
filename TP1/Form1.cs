@@ -15,7 +15,7 @@ namespace simulacion_tp1
     {
         private string tipo;
         private Generador generador;
-        List<NroRandom> lista = new List<NroRandom>();
+        List<NroRandom> lista = new List<NroRandom>(); 
         int tamanio;
         List<Intervalo> intervalos;
 
@@ -97,7 +97,8 @@ namespace simulacion_tp1
             txtC.Text = tipo != "multiplicativo" ? "" : "0";
             txtG.Text = "";
             txtTamanio.Text = "";
-
+            lista.Clear();
+            this.grilla.DataSource = null;
             //histograma
             dgvTablaFecuencia.DataSource = null;
             lblGradosLibertad.Text = "";
@@ -106,8 +107,8 @@ namespace simulacion_tp1
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-
-            this.grilla.Rows.Clear();
+            //lista ;
+            //this.grilla.Rows.Clear();
             if (isValid())
             {
                 int x = int.Parse(txtX.Text);
@@ -297,83 +298,94 @@ namespace simulacion_tp1
         {
             try
             {
-                this.grilla.Rows.Clear();
-                foreach (var item in lista)
+                if (lista.Count!=0)
                 {
-                    if ((item.Posicion) < (21 * press))
+
+                    this.grilla.Rows.Clear();
+                    foreach (var item in lista)
                     {
-
-                        this.grilla.Rows.Add();
-                        grilla.Rows[item.Posicion - 1].Cells["posicion"].Value = item.Posicion;
-                        grilla.Rows[item.Posicion - 1].Cells["random"].Value = item.Random;
-                        //fila++;
-
-                    }
-                    else
-                    {
-                        press++;
-                        return;
-                    }
-
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Limpiar los datos nuevamete.");
-            }
-           
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (radioRango.Checked == true)
-            {
-                this.filaAPartirDeDondeMostrar = Convert.ToDouble(this.txtMinDesde.Text);
-                this.filaHastaDondeMostrar = Convert.ToDouble(this.txtMinHasta.Text);
-                foreach (var item in lista)
-                {
-                    if (item.Posicion == 0)
-                    {
-                        if ((item.Posicion - 1) >= this.filaAPartirDeDondeMostrar && (item.Posicion - 1) <= filaHastaDondeMostrar)
+                        if ((item.Posicion) < (21 * press))
                         {
 
                             this.grilla.Rows.Add();
                             grilla.Rows[item.Posicion - 1].Cells["posicion"].Value = item.Posicion;
                             grilla.Rows[item.Posicion - 1].Cells["random"].Value = item.Random;
-
+                            //fila++;
 
                         }
-                    }else
-                    {
-                        try
+                        else
                         {
-                            if ((item.Posicion) >= this.filaAPartirDeDondeMostrar && (item.Posicion) <= filaHastaDondeMostrar)
+                            press++;
+                            return;
+                        }
+
+                    }
+                }
+
+        }
+            catch (Exception)
+            {
+                MessageBox.Show("Limpiar los datos nuevamete.");
+            }
+
+
+}
+
+private void button2_Click(object sender, EventArgs e)
+        {
+            if (lista.Count!=0)
+            {
+                grilla.DataSource = null;
+                grilla.Rows.Clear();
+                if (radioRango.Checked == true)
+                {
+                    this.filaAPartirDeDondeMostrar = Convert.ToDouble(this.txtMinDesde.Text);
+                    this.filaHastaDondeMostrar = Convert.ToDouble(this.txtMinHasta.Text);
+                    foreach (var item in lista)
+                    {
+                        if (item.Posicion == 0)
+                        {
+                            if ((item.Posicion - 1) >= this.filaAPartirDeDondeMostrar && (item.Posicion - 1) <= filaHastaDondeMostrar)
                             {
 
-                                int aux = grilla.Rows.Add();
-                                grilla.Rows[aux].Cells["posicion"].Value = item.Posicion;
-                                grilla.Rows[aux].Cells["random"].Value = item.Random;
+                                this.grilla.Rows.Add();
+                                grilla.Rows[item.Posicion - 1].Cells["posicion"].Value = item.Posicion;
+                                grilla.Rows[item.Posicion - 1].Cells["random"].Value = item.Random;
 
 
                             }
                         }
-                        catch (Exception)
+                        else
                         {
+                            try
+                            {
+                                if ((item.Posicion) >= this.filaAPartirDeDondeMostrar && (item.Posicion) <= filaHastaDondeMostrar)
+                                {
+                                    
+                                    int aux = grilla.Rows.Add();
+                                    grilla.Rows[aux].Cells["posicion"].Value = item.Posicion;
+                                    grilla.Rows[aux].Cells["random"].Value = item.Random;
 
-                            MessageBox.Show("Limpiar los datos nuevamete.");
-                        }
-                    
+
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Limpiar los datos nuevamete.");
+                            }
+
                     }
-                  
+
+                    }
+
+                }
+                else if (radioCada10mil.Checked == true)
+                {
+                    grilla.DataSource = lista;
                 }
 
             }
-            else if (radioCada10mil.Checked == true)
-            {
-                grilla.DataSource = lista;
-            }
-
         }
+            
     }
 }

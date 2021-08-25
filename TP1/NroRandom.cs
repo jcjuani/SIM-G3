@@ -43,5 +43,7 @@ namespace simulacion_tp1
             set { random = value; }
             get { return random; }
         }
+
+        
     }
 }
